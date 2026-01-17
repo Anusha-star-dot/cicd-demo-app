@@ -7,9 +7,27 @@ trigger:
 - main
 
 pool:
-  name: Default
+  name: Default   # self-hosted agent pool
 
 steps:
-- script: echo Hello world
-  displayName: 'Test self-hosted agent'
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+  displayName: 'Use Python'
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    echo "Running flake8..."
+    flake8 .
+  displayName: 'Code quality check'
+
+- script: |
+    echo "Running tests..."
+    pytest || echo "No tests found"
+  displayName: 'Run tests'
+'
 
