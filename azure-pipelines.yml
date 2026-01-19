@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  name: Default   # your self-hosted agent pool
+  name: Default
 
 steps:
 - task: UsePythonVersion@0
