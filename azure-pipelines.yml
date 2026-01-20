@@ -3,7 +3,8 @@ trigger:
 
 pool:
   name: Default
-
+  demands:
+    - agent.name -equals anusha-agent
 steps:
 - task: UsePythonVersion@0
   inputs:
